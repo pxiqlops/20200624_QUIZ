@@ -29,24 +29,24 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<ArrayList<String>> quizArray = new ArrayList<>();
 
     String quizData[][] = {
-            // {"画像名", "正解"}
-            {"apple", "リンゴ"},
-            {"banana", "バナナ"},
-            {"durian", "ドリアン"},
-            {"grape", "ぶどう"},
-            {"ichigo", "いちご"},
-            {"kaki", "かき"},
-            {"kiwi", "キウイ"},
-            {"lemon", "レモン"},
-            {"melon", "メロン"},
-            {"mikan", "ミカン"},
-            {"momo", "もも"},
-            {"nashi", "なし"},
-            {"pineapple", "パイナップル"},
-            {"sakuranbo", "さくらんぼ"},
-            {"starfruit", "スターフルーツ"},
-            {"suika", "スイカ"},
-            {"younashi", "洋なし"}
+            // {"画像名", "正解ID"}
+            {"apple", "1"},
+            {"banana", "2"},
+            {"durian", "3"},
+            {"grape", "4"},
+            {"ichigo", "5"},
+            {"kaki", "6"},
+            {"kiwi", "7"},
+            {"lemon", "8"},
+            {"melon", "9"},
+            {"mikan", "10"},
+            {"momo", "11"},
+            {"nashi", "12"},
+            {"pineapple", "13"},
+            {"sakuranbo", "14"},
+            {"starfruit", "15"},
+            {"suika", "16"},
+            {"younashi", "17"}
     };
 
     @Override
@@ -112,16 +112,90 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkAnswer() {
-
         // ユーザーが入力したテキストを取得
         String answer = editText.getText().toString();
-
         String alertTitle;
-        if (answer.equals(rightAnswer)) {
+
+        // 正解フラグ
+        Integer answerflg = 0;
+
+        //　答えのパターンの照合
+        switch (rightAnswer){
+            case "1":
+                if (answer.equals("りんご")||answer.equals("リンゴ")||answer.equals("林檎")||answer.equals("アップル")||answer.equals("apple")) {
+                    answerflg = 1;
+                }
+            case "2":
+                if (answer.equals("ばなな")||answer.equals("バナナ")||answer.equals("banana")) {
+                    answerflg = 1;
+                }
+            case "3":
+                if (answer.equals("ドリアン")||answer.equals("dorian")) {
+                    answerflg = 1;
+                }
+            case "4":
+                if (answer.equals("ぶどう")||answer.equals("ブドウ")||answer.equals("グレープ")||answer.equals("grape")) {
+                    answerflg = 1;
+                }
+            case "5":
+                if (answer.equals("いちご")||answer.equals("イチゴ")||answer.equals("苺")||answer.equals("ストロベリー")||answer.equals("strawberry")) {
+                    answerflg = 1;
+                }
+            case "6":
+                if (answer.equals("かき")||answer.equals("カキ")||answer.equals("柿")||answer.equals("kaki")) {
+                    answerflg = 1;
+                }
+            case "7":
+                if (answer.equals("キウイ")||answer.equals("キウイフルーツ")||answer.equals("kiwi")) {
+                    answerflg = 1;
+                }
+            case "8":
+                if (answer.equals("レモン")||answer.equals("檸檬")||answer.equals("lemon")) {
+                    answerflg = 1;
+                }
+            case "9":
+                if (answer.equals("メロン")||answer.equals("melon")) {
+                    answerflg = 1;
+                }
+            case "10":
+                if (answer.equals("みかん")||answer.equals("ミカン")||answer.equals("蜜柑")||answer.equals("mikan")) {
+                    answerflg = 1;
+                }
+            case "11":
+                if (answer.equals("もも")||answer.equals("モモ")||answer.equals("桃")||answer.equals("ピーチ")||answer.equals("peach")) {
+                    answerflg = 1;
+                }
+            case "12":
+                if (answer.equals("なし")||answer.equals("ナシ")||answer.equals("梨")||answer.equals("pear")) {
+                    answerflg = 1;
+                }
+            case "13":
+                if (answer.equals("さくらんぼ")||answer.equals("サクランボ")||answer.equals("チェリー")||answer.equals("cherry")) {
+                    answerflg = 1;
+                }
+            case "14":
+                if (answer.equals("パイナップル")||answer.equals("pineapple")) {
+                    answerflg = 1;
+                }
+            case "15":
+                if (answer.equals("スターフルーツ")||answer.equals("starfruit")) {
+                    answerflg = 1;
+                }
+            case "16":
+                if (answer.equals("すいか")||answer.equals("スイカ")||answer.equals("西瓜")||answer.equals("watermelon")) {
+                    answerflg = 1;
+                }
+            case "17":
+                if (answer.equals("洋梨")||answer.equals("洋ナシ")||answer.equals("洋なし")||answer.equals("pear")) {
+                    answerflg = 1;
+                }
+        }
+
+        // if (answer.equals(rightAnswer)) {
+        if (answerflg == 1) {
             // 正解
             alertTitle = "正解！";
             rightAnswerCount++;
-
         } else {
             // 不正解
             alertTitle = "不正解...";
@@ -130,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
         // ダイアログ作成
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(alertTitle);
-        builder.setMessage("答え：" + rightAnswer);
+        // builder.setMessage("答え：" + answer);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -138,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //if (quizArray.size() < 1) {
                 if (quizCount == 5) {
-                    // 全てのクイズを出題したら結果を表示
+                    // 5問を出題したら結果を表示
                     showResult();
                 } else {
                     // 次の問題を出題
